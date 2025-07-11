@@ -103,7 +103,13 @@ def main():
                             was_discovered = message_content.get('WasDiscovered', False)
                             system_name = message_content.get('StarSystem', 'Unknown System')
                             star_type = message_content.get('StarType')
-                            if not was_discovered and system_name not in discovered_systems and star_type is not None:
+                            scan_type = message_content.get('ScanType')
+                            if (
+                                not was_discovered
+                                and system_name not in discovered_systems
+                                and star_type is not None
+                                and scan_type != "NavBeaconDetail"
+                            ):
                                 print(f"New system discovered: {system_name}")
                                 print(f"Star type: {star_type}")
                                 print(f"Stellar mass: {message_content.get('StellarMass', 'Unknown Stellar Mass')}")
